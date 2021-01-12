@@ -22,7 +22,6 @@
           - set policy prefix-list SERVICE-PREFIXES rule 40 action permit
           - set policy prefix-list SERVICE-PREFIXES rule 40 prefix 172.29.100.0/24
           - set policy route-map STATIC-TO-BGP rule 10 action permit
-          - set policy route-map STATIC-TO-BGP rule 10 action permit
           - set policy route-map STATIC-TO-BGP rule 10 match ip address prefix-list SERVICE-PREFIXES
  
     - name: ... general bgp options
