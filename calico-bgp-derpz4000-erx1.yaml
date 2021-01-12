@@ -1,0 +1,20 @@
+---
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: bgppeer-erx1-65020
+spec:
+  peerIP: 10.16.87.101
+  asNumber: 65020
+---
+apiVersion: projectcalico.org/v3
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  asNumber: 65020
+  ### logSeverityScreen: Info
+  ### nodeToNodeMeshEnabled: false
+  serviceClusterIPs:
+  - cidr: 10.41.0.0/16
+

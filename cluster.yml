@@ -1,0 +1,67 @@
+cluster_name: derpz4000
+
+nodes:
+- address: rocket.gxize.local
+  user: cloud-user
+  role: [ controlplane, etcd, worker ]
+  hostname_override: n1208
+  ssh_key_path: "/misc/iso/cidata_rocket/rocket"
+
+local_cluster_auth_endpoint:
+  enabled: true
+addon_job_timeout: 68
+
+services:
+  kube-api:
+    service_cluster_ip_range: 10.41.0.0/16
+    service_node_port_range: 30000-52000  
+    pod_security_policy: false
+    extra_args:
+      audit-log-path: "-"
+      delete-collection-workers: 3
+      v: 2
+  kube-controller:
+    cluster_cidr: 10.40.0.0/16
+    service_cluster_ip_range: 10.41.0.0/16
+  kubelet:
+    cluster_dns_server: 10.41.0.10
+    extra_args:
+      max_pods: 128
+      kube-reserved: 'cpu=200m,memory=200Mi,ephemeral-storage=2Gi'
+      system-reserved: 'cpu=200m,memory=200Mi,ephemeral-storage=2Gi'
+  kubeproxy:
+    extra_args:
+      proxy-mode: ipvs
+      ipvs-scheduler: dh
+  etcd:
+    backup_config:
+      enabled: true
+      interval_hours: 12
+      retention: 6
+      safe_timestamp: false
+    creation: 12h
+    extra_args:
+      election-timeout: '6000'
+      heartbeat-interval: '600'
+    gid: 0
+    retention: 72h
+    snapshot: false
+
+ignore_docker_version: true
+kubernetes_version: v1.16.15-rancher1-3
+### new rke 1.2.4 wants --ignore-docker-version
+### unsure why its not working above
+
+authorization:
+  mode: rbac
+authentication:
+  strategy: x509
+
+network:
+  plugin: calico
+
+dns: 
+  provider: coredns
+  nodelocal:
+    ip_address: "169.254.22.11"
+
