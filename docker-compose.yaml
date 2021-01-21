@@ -1,0 +1,14 @@
+---
+version: '3'
+services:
+  bgp-frr-20210120:
+    container_name: frr-tor-bgp
+    image: frrouting/frr:latest
+    volumes:
+      - /usr/local/etc/frr/:/etc/frr/
+      - /dev/log:/dev/log
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
