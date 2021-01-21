@@ -10,3 +10,5 @@ This could be improved ... the STATIC-TO-BGP route-map is misleading, it just fi
 Every new node-- like worker nodes in k8s-- would need to be added to the ansible file.  This could be a loop or playbook.  
 
 There's a better option to bring a top-of-rack (TOR) BGP session closer to the VM, using perhaps FRrouting in a docker container or other k8s cluster/pods.
+
+Included some information around using FRRouting as a docker container TOR device.  It sits between the guest node-vms in the cluster, and the ERX1 equipment in the lab environment.  This frr-TOR-bgp device is configured as a route-reflector.  Docker-compose file for the container and a sample config also included.
