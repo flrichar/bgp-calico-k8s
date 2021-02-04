@@ -7,11 +7,11 @@
   tasks:
 
     - name: backup config locally
-      edgeos_config:
+      community.network.edgeos_config:
         backup: yes
 
     - name: ... SERVICE-PREFIXES prefix-list, STATIC-TO-BGP route-map
-      edgeos_config:
+      community.network.edgeos_config:
         lines: 
           - set policy prefix-list SERVICE-PREFIXES rule 10 action permit
           - set policy prefix-list SERVICE-PREFIXES rule 10 prefix 10.22.22.0/24
@@ -25,7 +25,7 @@
           - set policy route-map STATIC-TO-BGP rule 10 match ip address prefix-list SERVICE-PREFIXES
  
     - name: ... general bgp options
-      edgeos_config:
+      community.network.edgeos_config:
         lines: 
           - set protocols bgp 65020 network 10.0.0.0/8
           - set protocols bgp 65020 network 172.16.0.0/12
@@ -33,7 +33,7 @@
           - set protocols bgp 65020 redistribute static route-map STATIC-TO-BGP
 
     - name: ... bgp neighbor -- hexs760
-      edgeos_config:
+      community.network.edgeos_config:
         lines:
           - set protocols bgp 65020 neighbor 10.16.96.211 description hexs760
           - set protocols bgp 65020 neighbor 10.16.96.211 nexthop-self
@@ -41,7 +41,7 @@
           - set protocols bgp 65020 neighbor 10.16.96.211 soft-reconfiguration inbound
 
     - name: ... bgp neighbor -- calico-node n1208_rocket
-      edgeos_config:
+      community.network.edgeos_config:
         lines:
           - set protocols bgp 65020 neighbor 10.22.22.111 description n1208_rocket
           - set protocols bgp 65020 neighbor 10.22.22.111 nexthop-self
