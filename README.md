@@ -1,4 +1,4 @@
-# derpz4000
+# BGP Calico K8s Lab
 kubernetes with bgp lab
 
 My challenge here was to create a quick k8s single-node cluster with BGP and Calico, with only existing equipment and a few yaml files.
