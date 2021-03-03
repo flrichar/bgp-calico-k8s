@@ -48,9 +48,7 @@ services:
     snapshot: false
 
 ignore_docker_version: true
-kubernetes_version: v1.16.15-rancher1-3
-### new rke 1.2.4 wants --ignore-docker-version
-### unsure why its not working above
+kubernetes_version: v1.18.15-rancher1-1
 
 authorization:
   mode: rbac
